@@ -125,14 +125,11 @@
     .intro-time {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: var(--gray-100);
-      border-radius: 100px;
-      padding: 6px 14px;
+      gap: 5px;
       font-size: 13px;
-      font-weight: 600;
-      color: var(--gray-800);
-      margin-top: 20px;
+      font-weight: 500;
+      color: var(--gray-400);
+      margin-top: 14px;
     }
 
     /* Question */
@@ -356,7 +353,7 @@
 <div class="app">
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
-  <!-- ── SCREEN 0: Intro ── -->
+  <!-- ── SCREEN 0: Intro + Star Rating (combined) ── -->
   <div class="screen active" id="s0">
     <div class="wordmark">
       <div class="wordmark-dot">✈</div>
@@ -364,30 +361,16 @@
     </div>
     <div class="intro-flag" id="introFlag">🌏</div>
     <h1 class="intro-title">How was your trip to <span id="countryIntro">Thailand</span>?</h1>
-    <p class="intro-body">Your experience helps fellow Scapia travelers know what to expect. Takes just 60 seconds.</p>
-    <div class="intro-time">⏱ 60 seconds</div>
-    <div class="spacer"></div>
-    <div class="btn-area">
-      <button class="btn-main" onclick="go(1)">Share my experience</button>
-    </div>
-  </div>
-
-  <!-- ── SCREEN 1: Star Rating ── -->
-  <div class="screen" id="s1">
-    <div class="wordmark">
-      <div class="wordmark-dot">✈</div>
-      <span class="wordmark-text">Scapia Visa</span>
-    </div>
-    <div class="q-label">Question 1 of 4</div>
-    <h2 class="q-title">How would you rate your visa experience with Scapia?</h2>
-    <div class="stars-row">
+    <p class="intro-body">Share your best memory with the Scapia tribe.</p>
+    <div class="intro-time">⏱ Takes 60 seconds</div>
+    <div class="stars-row" style="margin-top: 36px;">
       <button class="star-btn" onclick="rateStar(1)">★</button>
       <button class="star-btn" onclick="rateStar(2)">★</button>
       <button class="star-btn" onclick="rateStar(3)">★</button>
       <button class="star-btn" onclick="rateStar(4)">★</button>
       <button class="star-btn" onclick="rateStar(5)">★</button>
     </div>
-    <div class="star-label" id="starLabel">Tap to rate</div>
+    <div class="star-label" id="starLabel">Tap a star to begin</div>
     <div class="spacer"></div>
   </div>
 
@@ -397,7 +380,7 @@
       <div class="wordmark-dot">✈</div>
       <span class="wordmark-text">Scapia Visa</span>
     </div>
-    <div class="q-label">Question 2 of 4</div>
+    <div class="q-label">Question 1 of 3</div>
     <h2 class="q-title">What made it great?</h2>
     <p class="q-sub">Pick all that apply</p>
     <div class="tags-wrap">
@@ -424,7 +407,7 @@
       <div class="wordmark-dot">✈</div>
       <span class="wordmark-text">Scapia Visa</span>
     </div>
-    <div class="q-label">Question 3 of 4</div>
+    <div class="q-label">Question 2 of 3</div>
     <h2 class="q-title">What should the Scapia tribe know before applying?</h2>
     <p class="q-sub">Optional — but your words could help someone plan better</p>
     <textarea class="text-field" id="reviewText"
@@ -443,7 +426,7 @@
       <div class="wordmark-dot">✈</div>
       <span class="wordmark-text">Scapia Visa</span>
     </div>
-    <div class="q-label">Question 4 of 4</div>
+    <div class="q-label">Question 3 of 3</div>
     <h2 class="q-title">Give the tribe a real look at <span id="countryPhoto">Thailand</span></h2>
     <p class="q-sub">A beach, a meal, the moment you landed — anything helps a fellow traveler picture it.</p>
 
@@ -503,7 +486,7 @@
   // ─── State ────────────────────────────────────────────────
   let currentScreen = 0;
   let starRating = 0;
-  const TOTAL = 5;
+  const TOTAL = 4;
 
   const STAR_LABELS = ['','Terrible 😞','Poor 😕','Okay 😐','Good 😊','Amazing! 🤩'];
 
