@@ -381,20 +381,9 @@
       <span class="wordmark-text">Scapia Visa</span>
     </div>
     <div class="q-label">Question 1 of 3</div>
-    <h2 class="q-title">What made it great?</h2>
+    <h2 class="q-title" id="tagsTitle">What made it great?</h2>
     <p class="q-sub">Pick all that apply</p>
-    <div class="tags-wrap">
-      <div class="tag-chip" onclick="toggleTag(this)">Got it fast</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Easy document checklist</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Kept me updated</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Support was helpful</div>
-      <div class="tag-chip" onclick="toggleTag(this)">No surprises</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Great value for money</div>
-      <div class="tag-chip" onclick="toggleTag(this)">No hidden charges</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Stress-free experience</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Would use again</div>
-      <div class="tag-chip" onclick="toggleTag(this)">Perfect for first-timers</div>
-    </div>
+    <div class="tags-wrap" id="tagsWrap"></div>
     <div class="spacer"></div>
     <div class="btn-area">
       <button class="btn-main" onclick="go(3)">Next →</button>
@@ -499,6 +488,28 @@
     window.scrollTo(0, 0);
   }
 
+  // ─── Tag sets by rating ───────────────────────────────────
+  const TAGS_POSITIVE = [
+    'Got it fast','Easy document checklist','Kept me updated',
+    'Support was helpful','No surprises','Great value for money',
+    'No hidden charges','Stress-free experience','Would use again',
+    'Perfect for first-timers'
+  ];
+  const TAGS_NEGATIVE = [
+    'Too slow','Unclear document checklist','Poor communication',
+    'Support wasn\'t helpful','Unexpected charges','Stressful experience',
+    'Wouldn\'t use again','Not worth the price'
+  ];
+
+  function buildTags(rating) {
+    const tags = rating <= 2 ? TAGS_NEGATIVE : TAGS_POSITIVE;
+    const title = rating <= 2 ? 'What went wrong?' : rating === 3 ? 'What stood out?' : 'What made it great?';
+    document.getElementById('tagsTitle').textContent = title;
+    document.getElementById('tagsWrap').innerHTML = tags
+      .map(t => `<div class="tag-chip" onclick="toggleTag(this)">${t}</div>`)
+      .join('');
+  }
+
   // ─── Stars ────────────────────────────────────────────────
   function rateStar(n) {
     starRating = n;
@@ -506,6 +517,7 @@
       s.classList.toggle('lit', i < n);
     });
     document.getElementById('starLabel').textContent = STAR_LABELS[n];
+    buildTags(n);
     setTimeout(() => go(2), 520);
   }
 
